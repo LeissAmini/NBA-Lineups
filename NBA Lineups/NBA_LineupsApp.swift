@@ -2,7 +2,7 @@
 //  NBA_LineupsApp.swift
 //  NBA Lineups
 //
-//  Created by Leiss Amini on 12/11/24.
+//  Created by Leiss Amini on 1/1/25.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct NBA_LineupsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
