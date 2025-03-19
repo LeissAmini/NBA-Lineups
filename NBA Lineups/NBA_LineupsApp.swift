@@ -15,3 +15,9 @@ struct NBA_LineupsApp: App {
         }
     }
 }
+
+struct MainView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+    }
+}

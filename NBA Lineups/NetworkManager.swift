@@ -12,12 +12,16 @@ class NetworkManager: ObservableObject {
     var timer: Timer?
 
     func startFetchingGames() {
-        stopFetchingGames() // Ensure any previous timer is canceled
+        // Ensure any previous timer is canceled
+        stopFetchingGames()
 
-        // Fetch immediately on app open
-        fetchGames()
+        // Pre-wake the server before fetching data
+        wakeUpServer {
+            // Fetch data after waking up/
+            self.fetchGames()
+        }
 
-        // Start a timer to call fetchGames() at optimized intervals
+        // Start a timer for periodic updates
         timer = Timer.scheduledTimer(withTimeInterval: determineFetchInterval(), repeats: true) { _ in
             self.fetchGames()
         }
@@ -26,6 +30,21 @@ class NetworkManager: ObservableObject {
     func stopFetchingGames() {
         timer?.invalidate()
         timer = nil
+    }
+
+    private func wakeUpServer(completion: @escaping () -> Void) {
+        guard let url = URL(string: "https://nba-lineups-backend.onrender.com/") else { return }
+
+        URLSession.shared.dataTask(with: url) { _, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Wake-up request failed: \(error.localizedDescription)")
+                } else if let httpResponse = response as? HTTPURLResponse {
+                    print("Wake-up request status: \(httpResponse.statusCode)")
+                }
+                completion() // Proceed to fetch data after waking up
+            }
+        }.resume()
     }
 
     func fetchGames() {
