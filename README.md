@@ -16,8 +16,7 @@ NBA Lineups is a mobile application built with SwiftUI that provides users with 
 - **Auto-refresh**: Automatically fetches updated data when the app appears
 
 ## Screenshots
-<img width="978" height="1920" alt="image" src="https://github.com/user-attachments/assets/d97237a4-6496-4c2d-ad3c-39caa177e366" />
-
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/d97237a4-6496-4c2d-ad3c-39caa177e366" />
 
 ## Architecture
 
